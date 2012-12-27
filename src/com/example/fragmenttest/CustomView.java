@@ -27,6 +27,7 @@ public class CustomView extends View {
 	private ArrayList<ArrayList> strokes;
 	Drawable enterShape;
 	Drawable normalShape;
+	String txt;
 
 	public CustomView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -44,27 +45,28 @@ public class CustomView extends View {
 		paint = createPaint(Color.GREEN, 8);
 		enterShape = getResources().getDrawable(R.drawable.shape_droptarget);
 		normalShape = getResources().getDrawable(R.drawable.shape);
-	
+
 	}
 
-	public CustomView(Context context) {
+	public CustomView(Context context, String txt) {
 		super(context);
 		points = new ArrayList();
 		strokes = new ArrayList();
 		paint = createPaint(Color.GREEN, 8);
 		enterShape = getResources().getDrawable(R.drawable.shape_droptarget);
 		normalShape = getResources().getDrawable(R.drawable.shape);
+		this.txt = txt;
 	}
 
 	@Override
 	public void onDraw(Canvas c) {
 		super.onDraw(c);
-		this.setBackgroundColor(Color.WHITE);
+		this.setBackgroundColor(Color.parseColor("#A9BCF5"));
 		paintBorder = createPaint(Color.BLACK, 1);
 		c.drawRect(0, 0, getMeasuredWidth(), getMeasuredHeight(), paintBorder);
 
-		paintText = createPaint(Color.RED, 5);
-		c.drawText("1", getMeasuredWidth() / 2, getMeasuredHeight() / 2,
+		paintText = createPaint(Color.BLACK, 1);
+		c.drawText(txt, getMeasuredWidth() / 2, getMeasuredHeight() / 2,
 				paintText);
 
 		for (ArrayList stroke : strokes) {
@@ -72,7 +74,6 @@ public class CustomView extends View {
 		}
 
 		drawStroke(points, c);
-
 	}
 
 	@Override
@@ -108,8 +109,8 @@ public class CustomView extends View {
 		temp.setColor(color);
 		temp.setStrokeWidth(width);
 		temp.setStrokeCap(Cap.ROUND);
+		temp.setTextSize(20);
 		return temp;
 	}
 
-	
 }
