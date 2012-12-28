@@ -34,14 +34,15 @@ public class Fragment1 extends Fragment implements OnDragListener,
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		try {
-			enterShape = getResources().getDrawable(R.drawable.shape_droptarget);
+			enterShape = getResources()
+					.getDrawable(R.drawable.shape_droptarget);
 			normalShape = getResources().getDrawable(R.drawable.shape);
 			Season s = new Season();
 			s.s = "fragment";
-			
+
 			onSeasonSelectedListener = (OnSeasonSelectedListener) activity;
 			setSeason(s);
-			
+
 		} catch (ClassCastException e) {
 			throw new ClassCastException(activity.toString()
 					+ " must implement OnSeasonSelectedListener");
@@ -62,16 +63,18 @@ public class Fragment1 extends Fragment implements OnDragListener,
 		int height = size.y;
 
 		FixedGridLayout gr = new FixedGridLayout(getActivity());
-		((FixedGridLayout) gr).setCellHeight(150);
-		((FixedGridLayout) gr).setCellWidth(150);
+		//((FixedGridLayout) gr).setCellHeight(150);
+		//((FixedGridLayout) gr).setCellWidth(150);
 
-		String Sorular[] = { "F-E-N-E-R-B-A-H-Ç-E", "A-N-D-R-O-İ-D", "F-A-C-E-B-O-O-K","Ü-M-İ-T- -B-E-S-E-N" };
-		int i1 = rnd.nextInt(Sorular.length - 1);		
-		String Soru= Sorular[i1];
-		
+		String Sorular[] = { "F-E-N-E-R-B-A-H-�-E", "A-N-D-R-O-�-D", "F-A-C-E-B-O-O-K" };
+		int i1 = rnd.nextInt(Sorular.length - 1);
+		String Soru = Sorular[i1];
+
 		String sArray[] = Soru.split("-");
 		shuffleArray(sArray);
-
+		
+		((FixedGridLayout) gr).setCellWidthHeight(sArray.length);
+		
 		for (int i = 0; i < sArray.length; i++) {
 			FrameLayout f = new FrameLayout(getActivity());
 			f.setLayoutParams(new android.widget.FrameLayout.LayoutParams(300,
@@ -95,7 +98,7 @@ public class Fragment1 extends Fragment implements OnDragListener,
 	}
 
 	static void shuffleArray(String[] ar) {
-		 Random rnd2 = new Random();
+		Random rnd2 = new Random();
 		for (int i = ar.length - 1; i >= 0; i--) {
 			int index = rnd2.nextInt(i + 1);
 			// Simple swap

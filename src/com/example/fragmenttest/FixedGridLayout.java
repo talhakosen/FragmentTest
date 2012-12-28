@@ -36,6 +36,18 @@ class FixedGridLayout extends ViewGroup {
 		mCellHeight = px;
 		requestLayout();
 	}
+	
+	public void setCellWidthHeight(int length) {
+		int w = getMeasuredWidth();
+		int h = getMeasuredHeight();
+		
+		double m = Math.sqrt(length);		
+		
+		//mCellHeight = length;
+		requestLayout();
+	}
+	
+	
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -51,6 +63,7 @@ class FixedGridLayout extends ViewGroup {
 		// avoid
 		// clipping transitioning children
 		int minCount = count > 3 ? count : 3;
+		
 		setMeasuredDimension(resolveSize(mCellWidth * minCount, widthMeasureSpec),resolveSize(mCellHeight * minCount, heightMeasureSpec));
 	}
 
@@ -65,7 +78,9 @@ class FixedGridLayout extends ViewGroup {
 		int x = 0;
 		int y = 0;
 		int i = 0;
+		
 		int count = getChildCount();
+		
 		for (int index = 0; index < count; index++) {
 			final View child = getChildAt(index);
 
@@ -76,6 +91,7 @@ class FixedGridLayout extends ViewGroup {
 			int top = y + ((cellHeight - h) / 2);
 
 			child.layout(left, top, left + w, top + h);
+			
 			if (i >= (columns - 1)) {
 				// advance to next row
 				i = 0;
@@ -86,5 +102,6 @@ class FixedGridLayout extends ViewGroup {
 				x += cellWidth;
 			}
 		}
+		
 	}
 }
